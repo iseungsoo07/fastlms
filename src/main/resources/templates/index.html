@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>메인 페이지</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+        <style>
+            .slider_wrap {
+                width: 800px;
+                max-width: 600px;
+            }
+
+            .my_bxslider img {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.my_bxslider').bxSlider({
+                auto: true,           // 자동 슬라이드
+                controls: true,      // 양옆 화살표 노출 여부
+                pager: true,         // 슬라이드 밑 버튼 노출 여부
+            });
+        });
+    </script>
+    <body>
+        <h1>메인 페이지 </h1>
+        <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+        <div class="slider_wrap">
+            <ul class="my_bxslider">
+                <li th:each="banner : ${list}">
+                    <a th:href="${banner.linkAddr}" th:target="${banner.openMethod}">
+                        <img th:src="${banner.urlFilename}" th:alt="${banner.bannerName}" style="width: 1000px;height: 300px">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
